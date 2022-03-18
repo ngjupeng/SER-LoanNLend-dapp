@@ -267,6 +267,7 @@ export default function Redemption() {
     setLends(lendsData);
     setLoans(loansData);
     console.log(loansData);
+    console.log(lendsData);
     setLoading(false);
     // console.log(lendsData);
     // console.log(loansData);

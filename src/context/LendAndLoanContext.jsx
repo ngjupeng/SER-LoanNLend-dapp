@@ -15,6 +15,12 @@ export const LendAndLoanProvider = ({ children }) => {
   const [contractLiquidity, setContractLiquidity] = useState();
   const [isSupportMetaMask, setIsSupportMetaMask] = useState(false);
   let provider;
+  if (window.ethereum) {
+    provider = new ethers.providers.Web3Provider(window.ethereum);
+  } else {
+    provider = undefined;
+  }
+
   const requestAccount = async () => {
     const accounts = await window.ethereum.request({
       method: "eth_requestAccounts",
@@ -38,37 +44,46 @@ export const LendAndLoanProvider = ({ children }) => {
     return tokenContract;
   };
   const getAccBalance = async () => {
-    if (account) {
-      let balance = await provider.getBalance(account);
-      return Number(ethers.utils.formatEther(balance.toString())).toFixed(2);
+    if (provider) {
+      if (account) {
+        let balance = await provider.getBalance(account);
+        return Number(ethers.utils.formatEther(balance.toString())).toFixed(2);
+      }
     }
   };
   const getUserOngoingLend = async () => {
-    const contract = getLoanContract(provider.getSigner());
-    if (account) {
-      const lends = await contract.getUserNotRetrieveLend();
-      let arr = [];
-      lends.forEach((item) => {
-        if (item.lender != "0x0000000000000000000000000000000000000000") {
-          arr.push(item);
-        }
-      });
+    let arr = [];
+    if (provider) {
+      const contract = getLoanContract(provider.getSigner());
+      if (account) {
+        const lends = await contract.getUserNotRetrieveLend();
+
+        lends.forEach((item) => {
+          if (item.lender != "0x0000000000000000000000000000000000000000") {
+            arr.push(item);
+          }
+        });
+      }
       return arr;
     }
   };
   const getUserOngoingLoan = async () => {
-    const contract = getLoanContract(provider.getSigner());
-    if (account) {
-      const loans = await contract.getUserOngoingLoans();
-      return loans;
+    if (provider) {
+      const contract = getLoanContract(provider.getSigner());
+      if (account) {
+        const loans = await contract.getUserOngoingLoans();
+        return loans;
+      }
     }
   };
   const setContractTotalLiquidity = async () => {
-    const contract = getLoanContract(provider);
-    const res = await contract.totalLiquidity();
-    setContractLiquidity(
-      Number(ethers.utils.formatEther(res.toString())).toFixed(3)
-    );
+    if (provider) {
+      const contract = getLoanContract(provider);
+      const res = await contract.totalLiquidity();
+      setContractLiquidity(
+        Number(ethers.utils.formatEther(res.toString())).toFixed(3)
+      );
+    }
   };
   const loadWeb3 = async () => {
     if (window.ethereum) {
@@ -107,7 +122,7 @@ export const LendAndLoanProvider = ({ children }) => {
     await getAccBalance();
     await getUserOngoingLoan();
     await getUserOngoingLend();
-  }, []);
+  }, [account]);
   return (
     <LendAndLoanContext.Provider
       value={{
