@@ -16,6 +16,11 @@ For those who need some BOW token to test this platform, visit https://bow-token
 
 The loan contract address: https://rinkeby.etherscan.io/address/0xaaE54151De7137E080538d84b7b8ab02F58A9768
 
+Tech/Framework used
+- [x] React
+- [x] Vite
+- [x] Ethers.js
+- [x] Tailwindcss
 
 
 
