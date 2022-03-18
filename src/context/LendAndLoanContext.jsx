@@ -104,6 +104,9 @@ export const LendAndLoanProvider = ({ children }) => {
   useEffect(async () => {
     await loadWeb3();
     await handleStartUp();
+    await getAccBalance();
+    await getUserOngoingLoan();
+    await getUserOngoingLend();
   }, []);
   return (
     <LendAndLoanContext.Provider
