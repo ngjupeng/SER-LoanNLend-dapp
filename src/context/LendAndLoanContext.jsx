@@ -13,7 +13,8 @@ export const LendAndLoanProvider = ({ children }) => {
   const [account, setAccount] = useState();
   const [networkId, setNetworkId] = useState();
   const [contractLiquidity, setContractLiquidity] = useState();
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const [isSupportMetaMask, setIsSupportMetaMask] = useState(false);
+  let provider;
   const requestAccount = async () => {
     const accounts = await window.ethereum.request({
       method: "eth_requestAccounts",
@@ -69,26 +70,40 @@ export const LendAndLoanProvider = ({ children }) => {
       Number(ethers.utils.formatEther(res.toString())).toFixed(3)
     );
   };
-  useEffect(async () => {
-    const acc = await provider.listAccounts();
-    if (acc) {
-      setAccount(acc[0]);
+  const loadWeb3 = async () => {
+    if (window.ethereum) {
+      provider = new ethers.providers.Web3Provider(window.ethereum);
+      setIsSupportMetaMask(true);
+    } else {
+      setIsSupportMetaMask(false);
     }
-    setContractTotalLiquidity();
-    setNetworkId(window.ethereum.networkVersion);
-    window.ethereum.on("chainChanged", function (networkId) {
-      // Time to reload your interface with the new networkId
-      setNetworkId(networkId);
-    });
-    window.ethereum.on("accountsChanged", async function (acc) {
+  };
+  const handleStartUp = async () => {
+    if (typeof window.ethereum != undefined) {
+      const acc = await provider.listAccounts();
       if (acc) {
-        // changed account
         setAccount(acc[0]);
-      } else {
-        // disconnect
-        setAccount([]);
       }
-    });
+      setContractTotalLiquidity();
+      setNetworkId(window.ethereum.networkVersion);
+      window.ethereum.on("chainChanged", function (networkId) {
+        // Time to reload your interface with the new networkId
+        setNetworkId(networkId);
+      });
+      window.ethereum.on("accountsChanged", async function (acc) {
+        if (acc) {
+          // changed account
+          setAccount(acc[0]);
+        } else {
+          // disconnect
+          setAccount([]);
+        }
+      });
+    }
+  };
+  useEffect(async () => {
+    await loadWeb3();
+    await handleStartUp();
   }, []);
   return (
     <LendAndLoanContext.Provider
@@ -104,6 +119,7 @@ export const LendAndLoanProvider = ({ children }) => {
         getUserOngoingLoan,
         contractLiquidity,
         setContractTotalLiquidity,
+        isSupportMetaMask,
       }}
     >
       {children}

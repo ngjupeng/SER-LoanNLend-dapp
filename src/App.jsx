@@ -8,43 +8,44 @@ import { Routes, Route } from "react-router-dom";
 import { LendAndLoanContext } from "./context/LendAndLoanContext";
 
 function App() {
-  const { networkId, contractLiquidity } = useContext(LendAndLoanContext);
-  const [isSupportMetaMask, setIsSupportMetaMask] = useState(false);
-  useEffect(() => {
-    // console.log(window.ethereum);
-    if (typeof window.ethereum != undefined) {
-      setIsSupportMetaMask(true);
-    } else {
-      setIsSupportMetaMask(false);
-    }
-  }, []);
+  const { networkId, contractLiquidity, isSupportMetaMask } =
+    useContext(LendAndLoanContext);
+
   return (
     <div className="App min-h-screen text-white">
       {isSupportMetaMask ? (
-        networkId == 4 ? (
-          <div>
+        networkId != undefined ? (
+          networkId == 4 ? (
             <div>
-              <Navbar />
+              <div>
+                <Navbar />
+              </div>
+              <Routes>
+                <Route path="/" element={<Loan />} />
+                <Route path="/lend" element={<Lend />} />
+                <Route path="/redemption" element={<Redemption />} />
+                <Route path="*" element={<Error />} />
+              </Routes>
             </div>
-            <Routes>
-              <Route path="/" element={<Loan />} />
-              <Route path="/lend" element={<Lend />} />
-              <Route path="/redemption" element={<Redemption />} />
-              <Route path="*" element={<Error />} />
-            </Routes>
-          </div>
+          ) : (
+            <div className="translate-y-1/2">
+              <div className="text-center flex items-center justify-center shadow-xl w-[90%] md:max-w-[450px] h-[200px] bg-[#191b1fc2] mx-auto rounded-xl p-4">
+                Sorry, our contract only run on rinkeby testnet, you have to
+                switch your network to continue...
+              </div>
+            </div>
+          )
         ) : (
           <div className="translate-y-1/2">
-            <div className="text-center flex items-center justify-center shadow-xl max-w-[450px] h-[200px] bg-[#191b1fc2] mx-auto rounded-xl p-4">
-              Sorry, our contract only run on rinkeby testnet, you have to
-              switch your network to continue...
+            <div className="text-center flex items-center justify-center shadow-xl w-[90%] md:max-w-[450px] h-[200px] bg-[#191b1fc2] mx-auto rounded-xl p-4">
+              Try to refresh the page ^_^
             </div>
           </div>
         )
       ) : (
         <div className="translate-y-1/2">
-          <div className="text-center flex items-center justify-center shadow-xl max-w-[450px] h-[200px] bg-[#191b1fc2] mx-auto rounded-xl p-4">
-            Please install MetaMask to continue...
+          <div className="text-center flex items-center justify-center shadow-xl w-[90%] md:max-w-[450px] h-[200px] bg-[#191b1fc2] mx-auto rounded-xl p-4">
+            You should consider trying MetaMask!
           </div>
         </div>
       )}
