@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400&family=Open+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Festive&family=Inter:wght@100;200;300;400&family=Open+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courgette&family=Festive&family=Inter:wght@100;200;300;400&family=Open+Sans:wght@300&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.bg-main {
+    background-color: #212429;
+}
+
+.bg-shine {
+    background-image: radial-gradient(50% 60% at 50% 30%, #C850C0 -400%, transparent 100%);
+    ;
+}
+
+.bg-3clr-gradient {
+    background-image: linear-gradient( 225deg, hsl(120deg 72% 46%) 0%, hsl(138deg 100% 39%) 11%, hsl(145deg 100% 38%) 22%, hsl(150deg 100% 37%) 33%, hsl(156deg 100% 36%) 44%, hsl(160deg 100% 34%) 56%, hsl(165deg 100% 33%) 67%, hsl(169deg 100% 32%) 78%, hsl(172deg 100% 30%) 89%, hsl(175deg 84% 32%) 100%);
+}
+
+.bg-list {
+    background: rgb(170, 26, 160);
+    background: radial-gradient(circle, rgba(170, 26, 160, 0.6194852941176471) 0%, rgba(0, 0, 0, 1) 87%);
+}
+
+.bg-line-loan {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+
+.bg-line-lend {
+    background: linear-gradient(-45deg, #23a6d5, #23d5ab, #ee7752, #e73c7e);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
