@@ -78,7 +78,7 @@ export default function Navbar() {
     if (statusNow) {
       let tokenBalance = getTokenContract(provider);
       const tokenAmount = await tokenBalance.balanceOf(account);
-      setUserBalance(tokenAmount.toString() / 1000000000000000);
+      setUserBalance(tokenAmount.toString() / 10 ** 18);
     } else {
       let balance = await provider.getBalance(account);
       setUserBalance(
