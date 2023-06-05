@@ -39,7 +39,9 @@ const WithdrawDetails = ({
                 title="Link to transaction"
                 target="_blank"
                 rel="nonreferrer nonopennner"
-                href={"https://rinkeby.etherscan.io/tx/" + withdrawDetails.hash}
+                href={
+                  "https://mumbai.polygonscan.com/tx/" + withdrawDetails.hash
+                }
                 className="my-2 break-words cursor-pointer "
               >
                 {withdrawDetails.hash}

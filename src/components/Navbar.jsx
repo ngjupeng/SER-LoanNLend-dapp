@@ -14,7 +14,7 @@ const NavItem = ({ active, content, handleOnClick }) => {
   return content == "Contract" ? (
     <a
       className={commonCss + "text-gray-300"}
-      href="https://rinkeby.etherscan.io/address/0xaaE54151De7137E080538d84b7b8ab02F58A9768"
+      href="https://mumbai.polygonscan.com/address/0x305C40132aCd1e9Ae0fE945BEa8192736F2B7B8f"
       target="_blank"
       rel="noopenner noreferrer"
     >
@@ -104,13 +104,13 @@ export default function Navbar() {
       </div>
       <div className="flex justify-self-end  md:justify-self-end  items-center justify-center">
         <a
-          href="https://rinkeby.etherscan.io/"
+          href="https://mumbai.polygonscan.com/"
           className="min-w-[170px] hidden 2xl:flex items-center mr-2 px-4 py-2 rounded-2xl bg-[#191b1f] cursor-pointer"
           target="_blank"
           rel="noopenner noreferrer"
         >
           <div className="w-[9px] h-[9px] bg-yellow-500 mr-2 rounded-full"></div>
-          Rinkeby Testnet
+          Mumbai Testnet
         </a>
         {!account ? (
           <div
@@ -134,7 +134,7 @@ export default function Navbar() {
             <a
               target="_blank"
               rel="noopenner noreferrer"
-              href={`https://rinkeby.etherscan.io/address/${account}`}
+              href={`https://mumbai.polygonscan.com/address/${account}`}
               className="px-4 py-2 bg-[#222529] rounded-2xl  cursor-pointer hover:border-gray-600 border-[1px] border-transparent transition duration-200"
             >
               {shortenAddress(account)}

@@ -110,7 +110,7 @@ const LendDetail = ({
               title="Link to transaction"
               target="_blank"
               rel="nonreferrer nonopennner"
-              href={"https://rinkeby.etherscan.io/tx/" + information.hash}
+              href={"https://mumbai.polygonscan.com/tx/" + information.hash}
               className="my-2 break-words cursor-pointer "
             >
               Transaction Hash: {information.hash}
@@ -136,7 +136,7 @@ const LendDetail = ({
                 <a
                   rel="noreferrer noopenner"
                   target="_blank"
-                  href={"https://rinkeby.etherscan.io/tx/" + lendTokenHash}
+                  href={"https://mumbai.polygonscan.com/tx/" + lendTokenHash}
                 >
                   {lendTokenHash}
                 </a>
@@ -151,7 +151,7 @@ const LendDetail = ({
                   target="_blank"
                   rel="noopenner noreferrer"
                   href={
-                    "https://rinkeby.etherscan.io/tx/" +
+                    "https://mumbai.polygonscan.com/tx/" +
                     approveTransactionDetail.hash
                   }
                 >
@@ -178,7 +178,7 @@ const LendDetail = ({
                   target="_blank"
                   rel="noopenner noreferrer"
                   href={
-                    "https://rinkeby.etherscan.io/address/" +
+                    "https://mumbai.polygonscan.com/address/" +
                     loanContractAddress
                   }
                 >

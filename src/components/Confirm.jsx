@@ -48,7 +48,7 @@ export default function Confirm({
           <a
             target="_blank"
             rel="noopenner noreferrer"
-            href={"https://rinkeby.etherscan.io/tx/" + hash}
+            href={"https://mumbai.polygonscan.com/tx/" + hash}
             className="block break-words md:mb-10"
           >
             Transaction hash: {hash}
