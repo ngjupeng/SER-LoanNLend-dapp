@@ -122,7 +122,7 @@ export default function Loan() {
   };
 
   return (
-    <div className="mt-10 md:mt-24">
+    <div className="mt-10 md:mt-10">
       <LoanConfirm
         ethRef={ethInputRef}
         bowRef={bowInputRef}
